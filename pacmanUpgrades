@@ -26,4 +26,4 @@
 #	6) "$TERMINAL" -e "$EDITOR" "$0" ;;
 #esac
 
-yay -Qu | grep -Fcv "[ignored]" | sed "s/^0$//g"
+pacman -Qu | grep -Fcv "[ignored]" | sed "s/^0$//g"

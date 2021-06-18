@@ -2,8 +2,15 @@
 
 #this check sound levels
 
-SINK=$(if [[ $(pactl list short | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,') = "" ]]; then
+SINK=$(if [[ $(pactl list short | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,') = "" \
+  && $(pactl list short | grep alsa_output.pci-0000_0c_00.4.analog-stereo \
+  | sed '/monitor/ d; s,^\([0-9][0-9]*\)[^0-9].*,\1,') = "1" ]]; then
 echo "1"
+elif [[ $(pactl list short | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,') != "" \
+  && $(pactl list short | grep RUNNING \
+  | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,') != "1" ]]; then
+  pactl list short | grep alsa_output.pci-0000_0c_00.4.analog-stereo \
+  | sed '/monitor/ d; s,^\([0-9][0-9]*\)[^0-9].*,\1,'
 else
 pactl list short | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,'
 fi)

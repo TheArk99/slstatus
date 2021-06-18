@@ -66,7 +66,8 @@ static const char unknown_str[] = "";
 static const struct arg args[] = {
 	/* function format          argument */
  /* { run_command, " %s  |  ", "volume"  },*/
-  { run_command, " %s | ", "moonphase"  },
+  { run_command, " %s | ", "soundCheck"  },
+  { run_command, "%s | ", "moonphase"  },
   { run_command, "%s ", "pacmanUpgrades"  },
   { run_command, "[%s]   ", "forecast"   },
   { cpu_perc, "[CPU  %s%%]   ", NULL	      },
